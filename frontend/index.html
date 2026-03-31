@@ -1,9 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Travel AI</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
+    padding: 40px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background: linear-gradient(135deg,#6366f1,#4f46e5);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow:0 5px 15px rgba(99,102,241,0.3);
+}
+
+.resultado {
+    border-left: 5px solid #6366f1;
+    background: #eef2ff;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius:8px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.panel {
+    background:#eef2ff;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌍 Travel AI</h1>
+
+<div id="panel_usuario" class="panel">
+    <b>👤 Usuario:</b> <span id="user_email">-</span><br>
+    <b>💼 Plan:</b> <span id="user_plan">-</span><br>
+    <b>📊 Consultas:</b> <span id="user_consultas">-</span>
+</div>
+
+<h3>Registro</h3>
+<input type="email" id="reg_email" placeholder="Email">
+<input type="password" id="reg_password" placeholder="Contraseña">
+<button onclick="registro()">Crear cuenta</button>
+<p id="reg_msg"></p>
+
+<hr>
+
+<h3>Login</h3>
+<input type="email" id="login_email" placeholder="Email">
+<input type="password" id="login_password" placeholder="Contraseña">
+<button onclick="login()">Iniciar sesión</button>
+<p id="login_msg"></p>
+
+<button onclick="logout()">Cerrar sesión</button>
+
+<button onclick="comprarPro()">💳 Comprar PRO (9.99€)</button>
+<p id="pago_msg"></p>
+
+<hr>
+
+<h3>Buscar viaje</h3>
+
+<input type="number" id="presupuesto" placeholder="Presupuesto (€)">
+
+<select id="tipo">
+    <option value="playa">Playa</option>
+    <option value="cultura">Cultura</option>
+    <option value="aventura">Aventura</option>
+    <option value="fiesta">Fiesta</option>
+    <option value="naturaleza">Naturaleza</option>
+    <option value="relax">Relax</option>
+</select>
+
+<button onclick="buscar()">Buscar destino</button>
+
+<p id="uso"></p>
+<p id="error" class="error"></p>
+
+<div id="resultados"></div>
+
+</div>
+
 <script>
 
-// 🌐 URL BACKEND (CAMBIA SOLO ESTO)
-const API_URL = "https://travel-ai-app.onrender.com";
-// ⚠️ PON AQUÍ TU URL REAL DE RENDER
-
+// 🔥 IMPORTANTE: TU BACKEND EN RENDER
+const API_URL = "https://travel-ai-app-1-fx7e.onrender.com";
 
 let usuario_logueado = null;
 
@@ -20,7 +138,7 @@ window.onload = function() {
 };
 
 
-// 👤 CARGAR PERFIL
+// 👤 PERFIL
 async function cargarPerfil() {
 
     if (!usuario_logueado) return;
@@ -71,7 +189,7 @@ async function registro() {
         document.getElementById("login_password").value = password;
 
     } catch (e) {
-        msg.innerHTML = "❌ Error de conexión";
+        msg.innerHTML = "❌ Error conectando con Render";
     }
 }
 
@@ -105,7 +223,7 @@ async function login() {
         cargarPerfil();
 
     } catch (e) {
-        msg.innerHTML = "❌ Error de conexión";
+        msg.innerHTML = "❌ Error conectando con Render";
     }
 }
 
@@ -201,8 +319,11 @@ async function buscar() {
         cargarPerfil();
 
     } catch (e) {
-        error.innerHTML = "Error conectando con el servidor";
+        error.innerHTML = "❌ Error conectando con Render";
     }
 }
 
 </script>
+
+</body>
+</html>
